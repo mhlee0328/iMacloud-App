@@ -1,0 +1,80 @@
+version: '3.9'
+services:
+
+  db:
+    container_name: IMM-db
+    image: mhlee0328/imm-adx-mariadb:0.0.2-offline
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: 123456
+    volumes:
+      - ./ContainerVolume/db:/var/lib/mysql
+    ports:
+      - 5053:3306
+    networks:
+      - IMM_stack_nw
+
+
+
+  mockapi:
+    container_name: IMM-mockapi
+    image: mhlee0328/imm-adx-mockapi:0.0.2-offline
+    restart: unless-stopped
+    ports:
+      - 15052:15052
+    networks:
+      - IMM_stack_nw
+
+
+  api:
+    container_name: IMM-api
+    image: mhlee0328/imm-adx-api:0.0.2-offline
+    restart: unless-stopped
+    ports:
+      - 5052:443
+      - 5082:80
+    environment:
+      - ConnectionStrings__AdtLayoutDataBase=server=db;port=3306;database=adt_layout;user=root;password=123456
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=123456
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+      - ./Certs/https:/https:ro
+    networks:
+      - IMM_stack_nw
+
+
+  web:
+    container_name: IMM-web
+    image: mhlee0328/imm-adx-web:0.0.2-offline
+    restart: unless-stopped
+    ports:
+      - 5051:443
+      - 5081:80
+    environment:
+      - Queue__Host=queue
+      - Queue__Port=5672
+      - Queue__Username=admin
+      - Queue__Password=admin
+      - Queue__SensorQueueName=sensor
+      - Queue__CommandQueueName=command
+      - BackendUrl=https://api/
+      - OfflineMode__Enabled=true
+      - OfflineMode__AzureApiUrl=http://mockapi:15052/
+      - EnableFactorySimulator=false
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=123456
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+      - ./Certs/https:/https:ro
+    networks:
+      - IMM_stack_nw
+
+
+
+networks:
+  IMM_stack_nw:
+    driver: bridge
+    
