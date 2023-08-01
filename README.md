@@ -8,40 +8,50 @@
 
 
 
-### 01. IMM-ADX-Trial ( Offline 版本)
+### IMM-ADX-Lite ( Trial Mode : Offline )
 
 - 該項目創建一個數據源DataSource，例如 : OPC UA 和 Modbus。
 
 - Azure 數字孿生定義語言 (DTDL)，進行Web交互式圖表的動態映射Mapping。
 
-- Trial 試用版提供  2 hour 運行測試。 
+- IMM-ADX-Lite 試用版 Trial 提供  2 hour 運行測試。 
 
-- MockAPI 提供預先建立的離線版 Azure Digital Twins 的測試功能。
+- MockAPI 提供預先建立的 offline 離線版 Azure Digital Twins 的測試功能。
 
-- IMM-ADX-Trial.zip 上架 App到 iMacloud App 智慧機械雲平台 runtime 封裝使用。
+- 透過 IMM-ADX-Lite.zip 封裝格式，將App上架至 iMacloud 智慧機械雲平台。
 
-- IMM-ADX-Trial 安裝 成為 iMaCloud App
-  ![docker-compose.offline](./IMM-ADX-Trial/apps/IMM-ADX-Trial/res/2023-07-31_155303.png)
+- IMM-ADX-Lite安裝 成為 iMaCloud App。
+  ![docker-compose.offline](./IMM-ADX-Lite/apps/IMM-ADX-Lite/res/2023-07-31_155303.png)
   
-- IMM-ADX-Trial 微服務網路架構圖
-  ![docker-compose.offline](./IMM-ADX-Trial/apps/IMM-ADX-Trial/res/docker-compose.offline.png)
+  
+  
+- IMM-ADX-Lite微服務網路架構圖
+  ![docker-compose.offline](./IMM-ADX-Lite/apps/IMM-ADX-Lite/res/docker-compose.offline.png)
   
 - 本地端容器化入口網址為 :  https://localhost:5051/
   
-  ![2023-08-01_164815](./IMM-ADX-Trial/apps/IMM-ADX-Trial/res/2023-08-01_164815.png)
+  ![2023-08-01_164815](./IMM-ADX-Lite/apps/IMM-ADX-Lite/res/2023-08-01_164815.png)
   
-  Datasource mapping 提供匯入 CSV 及匯出 CSV   
   
-  ![2023-08-01_164903](./IMM-ADX-Trial/apps/IMM-ADX-Trial/res/2023-08-01_164903.png)
+  
+- Datasource mapping 提供匯入 CSV 及匯出 CSV   
+  
+  ![2023-08-01_164903](./IMM-ADX-Lite/apps/IMM-ADX-Lite/res/2023-08-01_164903.png)
+  
+  
   
 - 執行一個您自己的OPC UA Server 資料來源 (例如 : IMM SimServer)
 
-  ![2023-07-30_232907](./IMM-ADX-Trial/apps/IMM-ADX-Trial/res/2023-07-30_232907.png)
+  ![2023-07-30_232907](./IMM-ADX-Lite/apps/IMM-ADX-Lite/res/2023-07-30_232907.png)
   
-- 本地端容器化REST API 網址為 :  https://localhost:5052/swagger/index.html
+  
+  
+- 本地端容器化 REST API 網址為 :  https://localhost:5052/swagger/index.html
 
-  ![2023-08-01_111503](./IMM-ADX-Trial/apps/IMM-ADX-Trial/res/2023-08-01_111503.png)
+  ![2023-08-01_111503](./IMM-ADX-Lite/apps/IMM-ADX-Lite/res/2023-08-01_111503.png)
+
+  
 
 - 在 Azure Digital Twins Explorer 中的模型
 
-![1](./IMM-ADX-Trial/apps/IMM-ADX-Trial/res/1.png)
+![1](./IMM-ADX-Lite/apps/IMM-ADX-Lite/res/1.png)
