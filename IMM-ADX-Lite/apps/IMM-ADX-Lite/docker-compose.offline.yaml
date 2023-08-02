@@ -18,7 +18,7 @@ services:
 
   mockapi:
     container_name: IMM-mockapi
-    image: mhlee0328/imm-adx-mockapi:0.0.2-offline
+    image: mhlee0328/imm-adx-mockapi:0.0.3-offline
     restart: unless-stopped
     ports:
       - 15052:15052
