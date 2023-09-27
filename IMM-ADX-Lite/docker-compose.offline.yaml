@@ -28,7 +28,7 @@ services:
 
   api:
     container_name: IMM-api
-    image: mhlee0328/imm-adx-api:0.0.2-offline
+    image: mhlee0328/imm-adx-api:0.0.3-offline
     restart: unless-stopped
     ports:
       - 5052:443
@@ -47,7 +47,7 @@ services:
 
   web:
     container_name: IMM-web
-    image: mhlee0328/imm-adx-web:0.0.2-offline
+    image: mhlee0328/imm-adx-web:0.0.3-offline
     restart: unless-stopped
     ports:
       - 5051:443
