@@ -1,0 +1,703 @@
+[
+    {
+        "id": "17230fa0544982c3",
+        "type": "tab",
+        "label": "ModbusTCP_Sim_Server",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "f6f2187d.f17ca8",
+        "type": "tab",
+        "label": "ModbusTCP_Client",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "2e8c7f5c.ab73d",
+        "type": "tab",
+        "label": "OPCUA_Sim_Server",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "1189b38ffaa52c97",
+        "type": "tab",
+        "label": "OPCUA_Client",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "7ab504ca737b49a2",
+        "type": "modbus-client",
+        "name": "ModbucTCP Demo Server",
+        "clienttype": "tcp",
+        "bufferCommands": true,
+        "stateLogEnabled": false,
+        "queueLogEnabled": false,
+        "failureLogEnabled": true,
+        "tcpHost": "localhost",
+        "tcpPort": "502",
+        "tcpType": "DEFAULT",
+        "serialPort": "/dev/ttyUSB",
+        "serialType": "RTU-BUFFERD",
+        "serialBaudrate": "9600",
+        "serialDatabits": "8",
+        "serialStopbits": "1",
+        "serialParity": "none",
+        "serialConnectionDelay": "100",
+        "serialAsciiResponseStartDelimiter": "0x3A",
+        "unit_id": 1,
+        "commandDelay": 1,
+        "clientTimeout": 1000,
+        "reconnectOnTimeout": true,
+        "reconnectTimeout": 2000,
+        "parallelUnitIdsAllowed": true
+    },
+    {
+        "id": "65eab404d2fa770a",
+        "type": "OpcUa-Endpoint",
+        "endpoint": "opc.tcp://localhost:4840",
+        "secpol": "None",
+        "secmode": "None",
+        "none": true,
+        "login": false,
+        "usercert": false,
+        "usercertificate": "",
+        "userprivatekey": ""
+    },
+    {
+        "id": "6297f2d48337016e",
+        "type": "inject",
+        "z": "17230fa0544982c3",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 220,
+        "y": 340,
+        "wires": [
+            [
+                "42555d5c58314c77",
+                "7a9d1b008a175507",
+                "b4621743726a9ec7",
+                "360035c63395c1af",
+                "a1698139491dab3b"
+            ]
+        ]
+    },
+    {
+        "id": "42555d5c58314c77",
+        "type": "function",
+        "z": "17230fa0544982c3",
+        "name": "write holding 2002",
+        "func": "msg.payload = {\n    'value': [\n        0, 0,    // 2000\n        0, 0,    // 2001\n        0, 100,  // 2002\n        0, 255   // 2003\n    ],\n    'register': 'holding',\n    'address': 2000 / 4,\n    'disableMsgOutput': 0\n};\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 460,
+        "wires": [
+            [
+                "c96f5bebd2c4dace"
+            ]
+        ]
+    },
+    {
+        "id": "c96f5bebd2c4dace",
+        "type": "modbus-server",
+        "z": "17230fa0544982c3",
+        "name": "",
+        "logEnabled": true,
+        "hostname": "0.0.0.0",
+        "serverPort": "502",
+        "responseDelay": 100,
+        "delayUnit": "ms",
+        "coilsBufferSize": "4096",
+        "holdingBufferSize": "4096",
+        "inputBufferSize": "4096",
+        "discreteBufferSize": "4096",
+        "showErrors": false,
+        "x": 740,
+        "y": 340,
+        "wires": [
+            [],
+            [],
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "7a9d1b008a175507",
+        "type": "function",
+        "z": "17230fa0544982c3",
+        "name": "write holding 3002",
+        "func": "msg.payload = {\n    'value': [\n        0, 0,    // 3000\n        0, 0,    // 3001\n        0, 50 + Math.floor(Math.random() * 50),  // 3002\n        0, 255   // 3003 (just for test)\n    ],\n    'register': 'holding',\n    'address': 3000 / 4,\n    'disableMsgOutput': 0\n};\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 500,
+        "wires": [
+            [
+                "c96f5bebd2c4dace"
+            ]
+        ]
+    },
+    {
+        "id": "b4621743726a9ec7",
+        "type": "function",
+        "z": "17230fa0544982c3",
+        "name": "write holding 4002",
+        "func": "msg.payload = {\n    'value': [\n        0, 0,    // 4000\n        0, 0,    // 4001\n        0, 100 + Math.floor(Math.random() * 50),  // 4002\n        0, 255   // 4003 (just for test)\n    ],\n    'register': 'holding',\n    'address': 4000 / 4,\n    'disableMsgOutput': 0\n};\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 540,
+        "wires": [
+            [
+                "c96f5bebd2c4dace"
+            ]
+        ]
+    },
+    {
+        "id": "360035c63395c1af",
+        "type": "function",
+        "z": "17230fa0544982c3",
+        "name": "write coil",
+        "func": "msg.payload = {\n    'value': [\n        true, false, true, true, true, false, true, true,\n        parseInt(Math.random() + 0.5),\n        parseInt(Math.random() + 0.5),\n        parseInt(Math.random() + 0.5),\n        parseInt(Math.random() + 0.5),\n        parseInt(Math.random() + 0.5),\n        parseInt(Math.random() + 0.5),\n        parseInt(Math.random() + 0.5),\n        parseInt(Math.random() + 0.5)\n    ],\n    'register': 'coils',\n    'address': 0,\n    'disableMsgOutput': 0\n};\nreturn msg;\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 260,
+        "wires": [
+            [
+                "c96f5bebd2c4dace"
+            ]
+        ]
+    },
+    {
+        "id": "a1698139491dab3b",
+        "type": "function",
+        "z": "17230fa0544982c3",
+        "name": "write holding 0",
+        "func": "msg.payload = {\n    'value': [\n        0, 10,    // 0\n        0, 20,    // 1\n        0, 30,    // 2\n        0, 40     // 3\n    ],\n    'register': 'holding',\n    'address': 0,\n    'disableMsgOutput': 0\n};\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 420,
+        "wires": [
+            [
+                "c96f5bebd2c4dace"
+            ]
+        ]
+    },
+    {
+        "id": "dcacf80b8abe6b07",
+        "type": "modbus-read",
+        "z": "f6f2187d.f17ca8",
+        "name": "FC 3 (2002)",
+        "topic": "",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": false,
+        "unitid": "",
+        "dataType": "HoldingRegister",
+        "adr": "2002",
+        "quantity": "2",
+        "rate": "1",
+        "rateUnit": "s",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "7ab504ca737b49a2",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 790,
+        "y": 220,
+        "wires": [
+            [
+                "33f61237e9f35a66"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "7f1c7b93e95ff367",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "ModbusTCP_FC3_3002",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1130,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "dde03c208048711a",
+        "type": "modbus-read",
+        "z": "f6f2187d.f17ca8",
+        "name": "FC 3 (3002)",
+        "topic": "",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": false,
+        "unitid": "",
+        "dataType": "HoldingRegister",
+        "adr": "3002",
+        "quantity": "1",
+        "rate": "1",
+        "rateUnit": "s",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "7ab504ca737b49a2",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 790,
+        "y": 300,
+        "wires": [
+            [
+                "7f1c7b93e95ff367"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "7528a4727e511f25",
+        "type": "modbus-read",
+        "z": "f6f2187d.f17ca8",
+        "name": "FC 3 (4002)",
+        "topic": "",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": false,
+        "unitid": "",
+        "dataType": "HoldingRegister",
+        "adr": "4002",
+        "quantity": "1",
+        "rate": "1",
+        "rateUnit": "s",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "7ab504ca737b49a2",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 790,
+        "y": 380,
+        "wires": [
+            [
+                "59a536f102709252"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "59a536f102709252",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "ModbusTCP_FC3_4002",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1130,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "33f61237e9f35a66",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "ModbusTCP_FC3_2002",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1130,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "56b690944a4ebe47",
+        "type": "modbus-read",
+        "z": "f6f2187d.f17ca8",
+        "name": "FC 1",
+        "topic": "",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": false,
+        "unitid": "",
+        "dataType": "Coil",
+        "adr": "0",
+        "quantity": "64",
+        "rate": "1",
+        "rateUnit": "s",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "7ab504ca737b49a2",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 770,
+        "y": 480,
+        "wires": [
+            [
+                "f79a965fcea4764e"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "f79a965fcea4764e",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "ModbucTCP_Output",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1120,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "38ce10de.7d8c",
+        "type": "opcua-compact-server",
+        "z": "2e8c7f5c.ab73d",
+        "port": "4840",
+        "endpoint": "",
+        "productUri": "",
+        "acceptExternalCommands": true,
+        "maxAllowedSessionNumber": "10",
+        "maxConnectionsPerEndpoint": "10",
+        "maxAllowedSubscriptionNumber": "100",
+        "alternateHostname": "",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": true,
+        "allowAnonymous": true,
+        "individualCerts": false,
+        "isAuditing": false,
+        "serverDiscovery": true,
+        "users": [],
+        "xmlsetsOPCUA": [],
+        "publicCertificateFile": "",
+        "privateCertificateFile": "",
+        "registerServerMethod": "2",
+        "discoveryServerEndpointUrl": "",
+        "capabilitiesForMDNS": "",
+        "maxNodesPerRead": 1000,
+        "maxNodesPerWrite": 1000,
+        "maxNodesPerHistoryReadData": 100,
+        "maxNodesPerBrowse": 3000,
+        "maxBrowseContinuationPoints": "10",
+        "maxHistoryContinuationPoints": "10",
+        "delayToInit": "1000",
+        "delayToClose": "200",
+        "serverShutdownTimeout": "100",
+        "addressSpaceScript": "function constructAlarmAddressSpace(server, addressSpace, eventObjects, done) {\n  // server = the created node-opcua server\n  // addressSpace = address space of the node-opcua server\n  // eventObjects = add event variables here to hold them in memory from this script\n\n  // internal sandbox objects are:\n  // node = the compact server node,\n  // coreServer = core compact server object for debug and access to NodeOPCUA\n  // this.sandboxNodeContext = node context node-red\n  // this.sandboxFlowContext = flow context node-red\n  // this.sandboxGlobalContext = global context node-red\n  // this.sandboxEnv = env variables\n  // timeout and interval functions as expected from nodejs\n\n  const opcua = coreServer.choreCompact.opcua;\n  const LocalizedText = opcua.LocalizedText;\n  const namespace = addressSpace.getOwnNamespace();\n\n  const Variant = opcua.Variant;\n  const DataType = opcua.DataType;\n  const DataValue = opcua.DataValue;\n\n  var flexServerInternals = this;\n\n  this.sandboxFlowContext.set(\"isoInput1\", 0);\n  this.setInterval(() => {\n    flexServerInternals.sandboxFlowContext.set(\n      \"isoInput1\",\n      Math.random() + 50.0\n    );\n  }, 500);\n  this.sandboxFlowContext.set(\"isoInput2\", 0);\n  this.sandboxFlowContext.set(\"isoInput3\", 0);\n  this.sandboxFlowContext.set(\"isoInput4\", 0);\n  this.sandboxFlowContext.set(\"isoInput5\", 0);\n  this.sandboxFlowContext.set(\"isoInput6\", 0);\n  this.sandboxFlowContext.set(\"isoInput7\", 0);\n  this.sandboxFlowContext.set(\"isoInput8\", 0);\n\n  this.sandboxFlowContext.set(\"isoOutput1\", 0);\n  this.setInterval(() => {\n    flexServerInternals.sandboxFlowContext.set(\n      \"isoOutput1\",\n      Math.random() + 10.0\n    );\n  }, 500);\n\n  this.sandboxFlowContext.set(\"isoOutput2\", 0);\n  this.sandboxFlowContext.set(\"isoOutput3\", 0);\n  this.sandboxFlowContext.set(\"isoOutput4\", 0);\n  this.sandboxFlowContext.set(\"isoOutput5\", 0);\n  this.sandboxFlowContext.set(\"isoOutput6\", 0);\n  this.sandboxFlowContext.set(\"isoOutput7\", 0);\n  this.sandboxFlowContext.set(\"isoOutput8\", 0);\n\n  coreServer.debugLog(\"init dynamic address space\");\n  const rootFolder = addressSpace.findNode(\"RootFolder\");\n\n  node.warn(\"construct new address space for OPC UA\");\n\n  const myDevice = namespace.addFolder(rootFolder.objects, {\n    \"browseName\": \"RaspberryPI-Zero-WLAN\"\n  });\n  const gpioFolder = namespace.addFolder(myDevice, { \"browseName\": \"GPIO\" });\n  const isoInputs = namespace.addFolder(gpioFolder, {\n    \"browseName\": \"Inputs\"\n  });\n  const isoOutputs = namespace.addFolder(gpioFolder, {\n    \"browseName\": \"Outputs\"\n  });\n\n  const gpioDI1 = namespace.addVariable({\n    \"organizedBy\": isoInputs,\n    \"browseName\": \"I1\",\n    \"nodeId\": \"ns=1;s=Isolated_Input1\",\n    \"dataType\": \"Double\",\n    \"value\": {\n      \"get\": function() {\n        return new Variant({\n          \"dataType\": DataType.Double,\n          \"value\": flexServerInternals.sandboxFlowContext.get(\"isoInput1\")\n        });\n      },\n      \"set\": function(variant) {\n        flexServerInternals.sandboxFlowContext.set(\n          \"isoInput1\",\n          parseFloat(variant.value)\n        );\n        return opcua.StatusCodes.Good;\n      }\n    }\n  });\n\n  const gpioDI2 = namespace.addVariable({\n    \"organizedBy\": isoInputs,\n    \"browseName\": \"I2\",\n    \"nodeId\": \"ns=1;s=Isolated_Input2\",\n    \"dataType\": \"Double\",\n    \"value\": {\n      \"get\": function() {\n        return new Variant({\n          \"dataType\": DataType.Double,\n          \"value\": flexServerInternals.sandboxFlowContext.get(\"isoInput2\")\n        });\n      },\n      \"set\": function(variant) {\n        flexServerInternals.sandboxFlowContext.set(\n          \"isoInput2\",\n          parseFloat(variant.value)\n        );\n        return opcua.StatusCodes.Good;\n      }\n    }\n  });\n\n  const gpioDI3 = namespace.addVariable({\n    \"organizedBy\": isoInputs,\n    \"browseName\": \"I3\",\n    \"nodeId\": \"ns=1;s=Isolated_Input3\",\n    \"dataType\": \"Double\",\n    \"value\": {\n      \"get\": function() {\n        return new Variant({\n          \"dataType\": DataType.Double,\n          \"value\": flexServerInternals.sandboxFlowContext.get(\"isoInput3\")\n        });\n      },\n      \"set\": function(variant) {\n        flexServerInternals.sandboxFlowContext.set(\n          \"isoInput3\",\n          parseFloat(variant.value)\n        );\n        return opcua.StatusCodes.Good;\n      }\n    }\n  });\n\n  const gpioDI4 = namespace.addVariable({\n    \"organizedBy\": isoInputs,\n    \"browseName\": \"I4\",\n    \"nodeId\": \"ns=1;s=Isolated_Input4\",\n    \"dataType\": \"Double\",\n    \"value\": {\n      \"get\": function() {\n        return new Variant({\n          \"dataType\": DataType.Double,\n          \"value\": flexServerInternals.sandboxFlowContext.get(\"isoInput4\")\n        });\n      },\n      \"set\": function(variant) {\n        flexServerInternals.sandboxFlowContext.set(\n          \"isoInput4\",\n          parseFloat(variant.value)\n        );\n        return opcua.StatusCodes.Good;\n      }\n    }\n  });\n\n  const gpioDI5 = namespace.addVariable({\n    \"organizedBy\": isoInputs,\n    \"browseName\": \"I5\",\n    \"nodeId\": \"ns=1;s=Isolated_Input5\",\n    \"dataType\": \"Double\",\n    \"value\": {\n      \"get\": function() {\n        return new Variant({\n          \"dataType\": DataType.Double,\n          \"value\": flexServerInternals.sandboxFlowContext.get(\"isoInput5\")\n        });\n      },\n      \"set\": function(variant) {\n        flexServerInternals.sandboxFlowContext.set(\n          \"isoInput5\",\n          parseFloat(variant.value)\n        );\n        return opcua.StatusCodes.Good;\n      }\n    }\n  });\n\n  const gpioDI6 = namespace.addVariable({\n    \"organizedBy\": isoInputs,\n    \"browseName\": \"I6\",\n    \"nodeId\": \"ns=1;s=Isolated_Input6\",\n    \"dataType\": \"Double\",\n    \"value\": {\n      \"get\": function() {\n        return new Variant({\n          \"dataType\": DataType.Double,\n          \"value\": flexServerInternals.sandboxFlowContext.get(\"isoInput6\")\n        });\n      },\n      \"set\": function(variant) {\n        flexServerInternals.sandboxFlowContext.set(\n          \"isoInput6\",\n          parseFloat(variant.value)\n        );\n        return opcua.StatusCodes.Good;\n      }\n    }\n  });\n\n  const gpioDI7 = namespace.addVariable({\n    \"organizedBy\": isoInputs,\n    \"browseName\": \"I7\",\n    \"nodeId\": \"ns=1;s=Isolated_Input7\",\n    \"dataType\": \"Double\",\n    \"value\": {\n      \"get\": function() {\n        return new Variant({\n          \"dataType\": DataType.Double,\n          \"value\": flexServerInternals.sandboxFlowContext.get(\"isoInput7\")\n        });\n      },\n      \"set\": function(variant) {\n        flexServerInternals.sandboxFlowContext.set(\n          \"isoInput7\",\n          parseFloat(variant.value)\n        );\n        return opcua.StatusCodes.Good;\n      }\n    }\n  });\n\n  const gpioDI8 = namespace.addVariable({\n    \"organizedBy\": isoInputs,\n    \"browseName\": \"I8\",\n    \"nodeId\": \"ns=1;s=Isolated_Input8\",\n    \"dataType\": \"Double\",\n    \"value\": {\n      \"get\": function() {\n        return new Variant({\n          \"dataType\": DataType.Double,\n          \"value\": flexServerInternals.sandboxFlowContext.get(\"isoInput8\")\n        });\n      },\n      \"set\": function(variant) {\n        flexServerInternals.sandboxFlowContext.set(\n          \"isoInput8\",\n          parseFloat(variant.value)\n        );\n        return opcua.StatusCodes.Good;\n      }\n    }\n  });\n\n  const gpioDO1 = namespace.addVariable({\n    \"organizedBy\": isoOutputs,\n    \"browseName\": \"O1\",\n    \"nodeId\": \"ns=1;s=Isolated_Output1\",\n    \"dataType\": \"Double\",\n    \"value\": {\n      \"get\": function() {\n        return new Variant({\n          \"dataType\": DataType.Double,\n          \"value\": flexServerInternals.sandboxFlowContext.get(\"isoOutput1\")\n        });\n      },\n      \"set\": function(variant) {\n        flexServerInternals.sandboxFlowContext.set(\n          \"isoOutput1\",\n          parseFloat(variant.value)\n        );\n        return opcua.StatusCodes.Good;\n      }\n    }\n  });\n\n  const gpioDO2 = namespace.addVariable({\n    \"organizedBy\": isoOutputs,\n    \"browseName\": \"O2\",\n    \"nodeId\": \"ns=1;s=Isolated_Output2\",\n    \"dataType\": \"Double\",\n    \"value\": {\n      \"get\": function() {\n        return new Variant({\n          \"dataType\": DataType.Double,\n          \"value\": flexServerInternals.sandboxFlowContext.get(\"isoOutput2\")\n        });\n      },\n      \"set\": function(variant) {\n        flexServerInternals.sandboxFlowContext.set(\n          \"isoOutput2\",\n          parseFloat(variant.value)\n        );\n        return opcua.StatusCodes.Good;\n      }\n    }\n  });\n\n  const gpioDO3 = namespace.addVariable({\n    \"organizedBy\": isoOutputs,\n    \"browseName\": \"O3\",\n    \"nodeId\": \"ns=1;s=Isolated_Output3\",\n    \"dataType\": \"Double\",\n    \"value\": {\n      \"get\": function() {\n        return new Variant({\n          \"dataType\": DataType.Double,\n          \"value\": flexServerInternals.sandboxFlowContext.get(\"isoOutput3\")\n        });\n      },\n      \"set\": function(variant) {\n        flexServerInternals.sandboxFlowContext.set(\n          \"isoOutput3\",\n          parseFloat(variant.value)\n        );\n        return opcua.StatusCodes.Good;\n      }\n    }\n  });\n\n  const gpioDO4 = namespace.addVariable({\n    \"organizedBy\": isoOutputs,\n    \"browseName\": \"O4\",\n    \"nodeId\": \"ns=1;s=Isolated_Output4\",\n    \"dataType\": \"Double\",\n    \"value\": {\n      \"get\": function() {\n        return new Variant({\n          \"dataType\": DataType.Double,\n          \"value\": flexServerInternals.sandboxFlowContext.get(\"isoOutput4\")\n        });\n      },\n      \"set\": function(variant) {\n        flexServerInternals.sandboxFlowContext.set(\n          \"isoOutput4\",\n          parseFloat(variant.value)\n        );\n        return opcua.StatusCodes.Good;\n      }\n    }\n  });\n\n  const gpioDO5 = namespace.addVariable({\n    \"organizedBy\": isoOutputs,\n    \"browseName\": \"O5\",\n    \"nodeId\": \"ns=1;s=Isolated_Output5\",\n    \"dataType\": \"Double\",\n    \"value\": {\n      \"get\": function() {\n        return new Variant({\n          \"dataType\": DataType.Double,\n          \"value\": flexServerInternals.sandboxFlowContext.get(\"isoOutput5\")\n        });\n      },\n      \"set\": function(variant) {\n        flexServerInternals.sandboxFlowContext.set(\n          \"isoOutput5\",\n          parseFloat(variant.value)\n        );\n        return opcua.StatusCodes.Good;\n      }\n    }\n  });\n\n  const gpioDO6 = namespace.addVariable({\n    \"organizedBy\": isoOutputs,\n    \"browseName\": \"O6\",\n    \"nodeId\": \"ns=1;s=Isolated_Output6\",\n    \"dataType\": \"Double\",\n    \"value\": {\n      \"get\": function() {\n        return new Variant({\n          \"dataType\": DataType.Double,\n          \"value\": flexServerInternals.sandboxFlowContext.get(\"isoOutput6\")\n        });\n      },\n      \"set\": function(variant) {\n        flexServerInternals.sandboxFlowContext.set(\n          \"isoOutput6\",\n          parseFloat(variant.value)\n        );\n        return opcua.StatusCodes.Good;\n      }\n    }\n  });\n\n  const gpioDO7 = namespace.addVariable({\n    \"organizedBy\": isoOutputs,\n    \"browseName\": \"O7\",\n    \"nodeId\": \"ns=1;s=Isolated_Output7\",\n    \"dataType\": \"Double\",\n    \"value\": {\n      \"get\": function() {\n        return new Variant({\n          \"dataType\": DataType.Double,\n          \"value\": flexServerInternals.sandboxFlowContext.get(\"isoOutput7\")\n        });\n      },\n      \"set\": function(variant) {\n        flexServerInternals.sandboxFlowContext.set(\n          \"isoOutput7\",\n          parseFloat(variant.value)\n        );\n        return opcua.StatusCodes.Good;\n      }\n    }\n  });\n\n  const gpioDO8 = namespace.addVariable({\n    \"organizedBy\": isoOutputs,\n    \"browseName\": \"O8\",\n    \"nodeId\": \"ns=1;s=Isolated_Output8\",\n    \"dataType\": \"Double\",\n    \"value\": {\n      \"get\": function() {\n        return new Variant({\n          \"dataType\": DataType.Double,\n          \"value\": flexServerInternals.sandboxFlowContext.get(\"isoOutput8\")\n        });\n      },\n      \"set\": function(variant) {\n        flexServerInternals.sandboxFlowContext.set(\n          \"isoOutput8\",\n          parseFloat(variant.value)\n        );\n        return opcua.StatusCodes.Good;\n      }\n    }\n  });\n\n  //------------------------------------------------------------------------------\n  // Add a view\n  //------------------------------------------------------------------------------\n  const viewDI = namespace.addView({\n    \"organizedBy\": rootFolder.views,\n    \"browseName\": \"RPIW0-Digital-Ins\"\n  });\n\n  const viewDO = namespace.addView({\n    \"organizedBy\": rootFolder.views,\n    \"browseName\": \"RPIW0-Digital-Outs\"\n  });\n\n  viewDI.addReference({\n    \"referenceType\": \"Organizes\",\n    \"nodeId\": gpioDI1.nodeId\n  });\n\n  viewDI.addReference({\n    \"referenceType\": \"Organizes\",\n    \"nodeId\": gpioDI2.nodeId\n  });\n\n  viewDI.addReference({\n    \"referenceType\": \"Organizes\",\n    \"nodeId\": gpioDI3.nodeId\n  });\n\n  viewDI.addReference({\n    \"referenceType\": \"Organizes\",\n    \"nodeId\": gpioDI4.nodeId\n  });\n\n  viewDI.addReference({\n    \"referenceType\": \"Organizes\",\n    \"nodeId\": gpioDI5.nodeId\n  });\n\n  viewDI.addReference({\n    \"referenceType\": \"Organizes\",\n    \"nodeId\": gpioDI6.nodeId\n  });\n\n  viewDI.addReference({\n    \"referenceType\": \"Organizes\",\n    \"nodeId\": gpioDI7.nodeId\n  });\n\n  viewDI.addReference({\n    \"referenceType\": \"Organizes\",\n    \"nodeId\": gpioDI8.nodeId\n  });\n\n  viewDO.addReference({\n    \"referenceType\": \"Organizes\",\n    \"nodeId\": gpioDO1.nodeId\n  });\n\n  viewDO.addReference({\n    \"referenceType\": \"Organizes\",\n    \"nodeId\": gpioDO2.nodeId\n  });\n\n  viewDO.addReference({\n    \"referenceType\": \"Organizes\",\n    \"nodeId\": gpioDO3.nodeId\n  });\n\n  viewDO.addReference({\n    \"referenceType\": \"Organizes\",\n    \"nodeId\": gpioDO4.nodeId\n  });\n\n  viewDO.addReference({\n    \"referenceType\": \"Organizes\",\n    \"nodeId\": gpioDO5.nodeId\n  });\n\n  viewDO.addReference({\n    \"referenceType\": \"Organizes\",\n    \"nodeId\": gpioDO6.nodeId\n  });\n\n  viewDO.addReference({\n    \"referenceType\": \"Organizes\",\n    \"nodeId\": gpioDO7.nodeId\n  });\n\n  viewDO.addReference({\n    \"referenceType\": \"Organizes\",\n    \"nodeId\": gpioDO8.nodeId\n  });\n\n  coreServer.debugLog(\"create dynamic address space done\");\n  node.warn(\"construction of new address space for OPC UA done\");\n\n  done();\n}\n",
+        "x": 950,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "eea020c4.58aa",
+        "type": "inject",
+        "z": "2e8c7f5c.ab73d",
+        "name": "",
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.5",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 230,
+        "y": 120,
+        "wires": [
+            [
+                "11876179.c98d97"
+            ]
+        ]
+    },
+    {
+        "id": "11876179.c98d97",
+        "type": "function",
+        "z": "2e8c7f5c.ab73d",
+        "name": "set flow context Inputs",
+        "func": "// flow.set('isoInput1', Math.random() + 11.0) interval comes from server\nflow.set('isoInput2', Math.random() + 12.0)\nflow.set('isoInput3', Math.random() + 13.0)\nflow.set('isoInput4', Math.random() + 14.0)\nflow.set('isoInput5', Math.random() + 15.0)\nflow.set('isoInput6', Math.random() + 16.0)\nflow.set('isoInput7', Math.random() + 17.0)\nflow.set('isoInput8', Math.random() + 18.0)\n\nmsg.payload = [\n    flow.get('isoInput1'),\n    flow.get('isoInput2'),\n    flow.get('isoInput3'),\n    flow.get('isoInput4'),\n    flow.get('isoInput5'),\n    flow.get('isoInput6'),\n    flow.get('isoInput7'),\n    flow.get('isoInput8'),\n]\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 470,
+        "y": 120,
+        "wires": [
+            [
+                "c49994c7.8f5cc"
+            ]
+        ]
+    },
+    {
+        "id": "c49994c7.8f5cc",
+        "type": "debug",
+        "z": "2e8c7f5c.ab73d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "71946cf3.646e14",
+        "type": "function",
+        "z": "2e8c7f5c.ab73d",
+        "name": "set flow context Outputs",
+        "func": "// flow.set('isoOutput1', Math.random() + 1.0) interval comes from server\nflow.set('isoOutput2', Math.random() + 2.0)\nflow.set('isoOutput3', Math.random() + 3.0)\nflow.set('isoOutput4', Math.random() + 4.0)\nflow.set('isoOutput5', Math.random() + 5.0)\nflow.set('isoOutput6', Math.random() + 6.0)\nflow.set('isoOutput7', Math.random() + 7.0)\nflow.set('isoOutput8', Math.random() + 8.0)\n\nmsg.payload = [\n    flow.get('isoOutput1'),\n    flow.get('isoOutput2'),\n    flow.get('isoOutput3'),\n    flow.get('isoOutput4'),\n    flow.get('isoOutput5'),\n    flow.get('isoOutput6'),\n    flow.get('isoOutput7'),\n    flow.get('isoOutput8'),\n]\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 480,
+        "y": 180,
+        "wires": [
+            [
+                "4eebf9d5.8843d8"
+            ]
+        ]
+    },
+    {
+        "id": "494d041a.83d17c",
+        "type": "inject",
+        "z": "2e8c7f5c.ab73d",
+        "name": "",
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.5",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 230,
+        "y": 180,
+        "wires": [
+            [
+                "71946cf3.646e14"
+            ]
+        ]
+    },
+    {
+        "id": "4eebf9d5.8843d8",
+        "type": "debug",
+        "z": "2e8c7f5c.ab73d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "42433d66b6d80a3a",
+        "type": "OpcUa-Client",
+        "z": "1189b38ffaa52c97",
+        "endpoint": "65eab404d2fa770a",
+        "action": "read",
+        "deadbandtype": "a",
+        "deadbandvalue": 1,
+        "time": 10,
+        "timeUnit": "s",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "folderName4PKI": "",
+        "name": "",
+        "x": 380,
+        "y": 180,
+        "wires": [
+            [
+                "3d0f36a9865786dd"
+            ]
+        ]
+    },
+    {
+        "id": "650690c686aa3fa8",
+        "type": "inject",
+        "z": "1189b38ffaa52c97",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ns=1;s=Isolated_Input5;datatype=Double",
+        "payload": "",
+        "payloadType": "date",
+        "x": 160,
+        "y": 180,
+        "wires": [
+            [
+                "42433d66b6d80a3a"
+            ]
+        ]
+    },
+    {
+        "id": "3d0f36a9865786dd",
+        "type": "debug",
+        "z": "1189b38ffaa52c97",
+        "name": "OPCUA Input 5 (ns=1;s=Isolated_Input5)",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "f674fc276c49f644",
+        "type": "inject",
+        "z": "1189b38ffaa52c97",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "2",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ns=1;s=Isolated_Input7",
+        "payload": "",
+        "payloadType": "date",
+        "x": 160,
+        "y": 260,
+        "wires": [
+            [
+                "3fd1f2bb420e13b0"
+            ]
+        ]
+    },
+    {
+        "id": "92180f914f60d5a8",
+        "type": "debug",
+        "z": "1189b38ffaa52c97",
+        "name": "OPCUA Input 7 (ns=1;s=Isolated_Input7)",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "3fd1f2bb420e13b0",
+        "type": "OpcUa-Client",
+        "z": "1189b38ffaa52c97",
+        "endpoint": "65eab404d2fa770a",
+        "action": "read",
+        "deadbandtype": "a",
+        "deadbandvalue": 1,
+        "time": 10,
+        "timeUnit": "s",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "folderName4PKI": "",
+        "name": "",
+        "x": 380,
+        "y": 260,
+        "wires": [
+            [
+                "92180f914f60d5a8"
+            ]
+        ]
+    }
+]

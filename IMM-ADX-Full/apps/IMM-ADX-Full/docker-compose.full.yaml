@@ -1,0 +1,98 @@
+version: '3.9'
+# 1.For iMacloud App 機械雲1.4 射出機參數管理模版與微服務串接模組_Full 
+# 2.Forked from docker-compose.prod.yaml. Users should be familiar with Azure ADT resource configurations
+# 3.Trial version expires after a 2-hour timeout.
+
+services:
+
+  db:
+    container_name: IMM-Full-db
+    image: mariadb:latest
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: 123456
+    volumes:
+      - ./ContainerVolume/db:/var/lib/mysql
+    ports:
+      - 5806:3306
+    networks:
+      - IMM_Full_stack_nw
+      
+
+  node-red:
+    container_name: IMM-Full-node-red
+    image: imm-adx-full-node-red:0.0.1-prod
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile.NodeRed
+    ports:
+      - 5880:1880
+      - 5840:4840
+      - 582:502
+    volumes:
+      - ./Simulators/NodeRed/data:/data
+    networks:
+      - IMM_Full_stack_nw
+
+
+
+
+  api:
+    container_name: IMM-Full-api
+    image: imm-adx-full-api:0.0.1-prod
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile.Api
+    environment:
+      - ConnectionStrings__AdtLayoutDataBase=server=db;port=3306;database=adt_layout;user=root;password=123456
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=123456
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+      - ./Certs/https:/https:ro
+    networks:
+      - IMM_Full_stack_nw
+
+
+
+  web:
+    container_name: IMM-Full-web
+    image: imm-adx-full-web:0.0.1-prod
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile.Web
+    ports:
+      - 8880:80
+      - 8443:443
+    environment:
+      # Azure AD 相關設定
+      - AzureAd__Instance=https://login.microsoftonline.com/
+      - AzureAd__Domain=mhlee0328hotmail.onmicrosoft.com
+      - AzureAd__TenantId=51557692-759d-47e4-aee6-2b7f8321ab76
+      - AzureAd__ClientId=460982e1-2ba0-425b-9f5d-452ec1cee957
+      - AzureAd__ClientSecret=peQ8Q~kCTnZIHDHH93g4vSvBEruUVg63.J4cHb9i
+      - AzureAd__CallbackPath=/signin-oidc
+      - Queue__Host=queue
+      - Queue__Port=5672
+      - Queue__Username=admin
+      - Queue__Password=admin
+      - Queue__SensorQueueName=sensor
+      - Queue__CommandQueueName=command
+      - BackendUrl=https://api/
+      - OfflineMode__Enabled=false
+      - EnableFactorySimulator=false
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=123456
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+      - ./Certs/https:/https:ro
+    networks:
+      - IMM_Full_stack_nw
+
+
+networks:
+  IMM_Full_stack_nw:
+    driver: bridge

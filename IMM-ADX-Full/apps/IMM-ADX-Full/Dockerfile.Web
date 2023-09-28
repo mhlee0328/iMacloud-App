@@ -1,0 +1,18 @@
+# Start with .NET Core 3.0
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS Builder
+# Add .NET 6.0 runtime.
+COPY --from=mcr.microsoft.com/dotnet/sdk:6.0 /usr/share/dotnet /usr/share/dotnet
+
+WORKDIR /source
+
+COPY . /source
+RUN dotnet restore
+RUN dotnet publish -c release -o /app --no-restore ./Web/ITRI_MMSL_ADX.Web.csproj
+
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.0  
+COPY --from=mcr.microsoft.com/dotnet/aspnet:6.0 /usr/share/dotnet /usr/share/dotnet
+WORKDIR /app
+EXPOSE 80
+EXPOSE 443
+COPY --from=Builder /app ./
+ENTRYPOINT ["dotnet", "ITRI_MMSL_ADX.Web.dll"]
