@@ -1,0 +1,5 @@
+﻿{
+    "AppName":"IMM-ADX-Full",
+    "AppIcon":"IMM-ADX-Full.png",
+    "EntryPoint":"https://localhost:8443/"
+}
