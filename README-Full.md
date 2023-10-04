@@ -313,9 +313,9 @@ Subscription ID : e0038f94-711b-4820-8415-ac34dbede1a3
 - 可參考機械雲的影片 IMM ADX Full 容器執行使用說明
 
   https://www.youtube.com/playlist?list=PLEsqL3NnFN3CTIBm1lhkIhLcG-NqZFWAY
+  
 
-<iframe width="2244" height="935" src="https://www.youtube.com/embed/7qiDYDjcOxU" title="IMM ADX Full 容器執行使用說明" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
+<iframe iframe width="2244" height="935" src="https://www.youtube.com/embed/7qiDYDjcOxU?si=Bua3qKjFU0Sf9QJ9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 
 
