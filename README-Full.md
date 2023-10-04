@@ -310,20 +310,14 @@ Subscription ID : e0038f94-711b-4820-8415-ac34dbede1a3
 
 # Ch2. IMM-ADX-Full 運行影片
 
-- 可參考機械雲的影片 IMM ADX Full 容器執行使用說明
+- 可參考機械雲的影片
 
   https://www.youtube.com/playlist?list=PLEsqL3NnFN3CTIBm1lhkIhLcG-NqZFWAY
+
   
-- [![YouTube 影片封面](http://img.youtube.com/vi/7qiDYDjcOxU/0.jpg)](https://www.youtube.com/watch?v=7qiDYDjcOxU "影片標題")
 
-
-
-GitHub 出於安全原因，不支持在 README 或其他 Markdown 文件中直接嵌入 `<iframe>`。這是為了防止潛在的跨站腳本攻擊（XSS）
-
-這邊方便用戶可以直接觀看 demo 影片。
-
-<iframe iframe width="2244" height="935" src="https://www.youtube.com/embed/7qiDYDjcOxU?si=Bua3qKjFU0Sf9QJ9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
+- 機械雲 IMM ADX Full 容器執行的影片
+[![YouTube 影片封面](http://img.youtube.com/vi/7qiDYDjcOxU/0.jpg)](https://www.youtube.com/watch?v=7qiDYDjcOxU "GitHub 出於安全原因，不支持在 README 或其他 Markdown 文件中直接嵌入 `<iframe>`。這是為了防止潛在的跨站腳本攻擊（XSS）")
 
 
 
