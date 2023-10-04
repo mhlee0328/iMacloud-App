@@ -1,0 +1,13 @@
+# Azure AD 相關設定
+- AzureAd__Instance=https://login.microsoftonline.com/
+- AzureAd__Domain=mhlee0328hotmail.onmicrosoft.com
+- AzureAd__TenantId=51557692-759d-47e4-aee6-2b7f8321ab76
+- AzureAd__ClientId=460982e1-2ba0-425b-9f5d-452ec1cee957
+- AzureAd__ClientSecret=peQ8Q~kCTnZIHDHH93g4vSvBEruUVg63.J4cHb9i
+- AzureAd__CallbackPath=/signin-oidc
+
+
+
+Resource group : itridev_imm_adt_rg
+Host name : itri-imm-adt-001.api.sea.digitaltwins.azure.net
+Subscription ID : e0038f94-711b-4820-8415-ac34dbede1a3
