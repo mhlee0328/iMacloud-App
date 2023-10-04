@@ -49,9 +49,10 @@ https://github.com/Azure/opendigitaltwins-dtdl/tree/master/DTDL/v2。
 - 支援 Node-Red 快速整合 (提供內建 Modbus Master/Slave 與 OPCUA Client/Server 節點 Demo 範例)。
 
 <p align="center">
-  <img src="./IMM-ADX-Full/apps/IMM-ADX-Full/res/IMacloud.png" alt="IMacloud.png"><br>
-  IMacloud App 安裝執行 IMM-ADX-Full 預設 https://localhost:8443 
+  <img src="./IMM-ADX-Full/apps/IMM-ADX-Full/res/iMacloud.png" alt="iMacloud.png"><br>
+  IMacloud App 安裝執行 IMM-ADX-Full 預設 https://localhost:8443
 </p>
+
 
 
 
@@ -60,7 +61,9 @@ https://github.com/Azure/opendigitaltwins-dtdl/tree/master/DTDL/v2。
 
 Docker Network 微服務網路架構圖
 
-ex : IMM-ADX-Full  的 OPC UA Server模擬器於 Host 端  opc.tcp://127.0.0.1:5840 運行  (這是於  Node-Red 模擬出來的  OPC UA Server )
+ex : IMM-ADX-Full  的 OPC UA Server模擬器於 Host 端  opc.tcp://127.0.0.1:5840 運行，
+
+這是於  Node-Red 模擬出來的  OPC UA Server，
 
 參考 Ch 3.2 入口網站 Node-Red 操作與說明，5840 在 Node-Red 其實是  host 5840 port 對應至內部 container 的 4840 port。
 
@@ -190,26 +193,26 @@ networks:
 - 從 Azure AD 取得 `Application (client) ID`, `Directory (tenant) ID` 與 `Primary domain` , `secrets`這些重要參數，必須搭配本專案之 docker-compose.full.yaml 組態檔設定。
 
 
-![](./IMM-ADX-Full/apps/IMM-ADX-Full/res/App Registration設定的畫面/2023-03-31_002606.png)
+![](./IMM-ADX-Full/apps/IMM-ADX-Full/res/AppRegistration設定的畫面/2023-03-31_002606.png)
 
 
 
 - OpenId Connect (OIDC) 設定，記得產生secrets key後，必須”先抄下secrets key”的value。
 
-![2023-03-31_002645](./IMM-ADX-Full/apps/IMM-ADX-Full/res/App Registration設定的畫面/2023-03-31_002645.png)
+![2023-03-31_002645](./IMM-ADX-Full/apps/IMM-ADX-Full/res/AppRegistration設定的畫面/2023-03-31_002645.png)
 
 - 這邊要依照您自己 Azure 的情況而定 SaaS PaaS 與 IaaS 各有不同，OpenId Connect (OIDC) 的 “ip 必須與部署的網址相同”
 - 依照下圖進行設定，尤其是 Redirect URI 千萬別忘了，網址要先設定為 https://localhost:9001/signin-oidc
 
 
-![2023-03-31_002827](./IMM-ADX-Full/apps/IMM-ADX-Full/res/App Registration設定的畫面/2023-03-31_002827.png)
+![2023-03-31_002827](./IMM-ADX-Full/apps/IMM-ADX-Full/res/AppRegistration設定的畫面/2023-03-31_002827.png)
 
 
 
 - 建立好之後，記得要到 **Authentication** 頁籤勾選 `ID tokens` 核取項目， 將OpenId Connect (OIDC) 設定 tokens 進行勾選
 
 
-![2023-03-31_002907](./IMM-ADX-Full/apps/IMM-ADX-Full/res/App Registration設定的畫面/2023-03-31_002907.png)
+![2023-03-31_002907](./IMM-ADX-Full/apps/IMM-ADX-Full/res/AppRegistration設定的畫面/2023-03-31_002907.png)
 
 
 
@@ -264,34 +267,34 @@ Subscription ID : e0038f94-711b-4820-8415-ac34dbede1a3
 
 - 範例  "itri-imm-adt-001" 重要的設定資訊
 
-![2023-03-31_100634](./IMM-ADX-Full/apps/IMM-ADX-Full/res/itridev_imm_adt_rg 設定畫面/2023-03-31_100634.png)
+![2023-03-31_100634](./IMM-ADX-Full/apps/IMM-ADX-Full/res/itridev_imm_adt_rg設定畫面/2023-03-31_100634.png)
 
 
 
 - 範例  "itri-imm-adt-001" 重要的設定資訊 Access Control ( IAM )
 
 
-![2023-03-31_102902](./IMM-ADX-Full/apps/IMM-ADX-Full/res/itridev_imm_adt_rg 設定畫面/2023-03-31_102902.png)
+![2023-03-31_102902](./IMM-ADX-Full/apps/IMM-ADX-Full/res/itridev_imm_adt_rg設定畫面/2023-03-31_102902.png)
 
 
 
 - 範例  "itri-imm-adt-001" 重要的設定資訊 Azure Digital Twins Explorer
 
-![2023-03-31_102954](./IMM-ADX-Full/apps/IMM-ADX-Full/res/itridev_imm_adt_rg 設定畫面/2023-03-31_102954.png)
+![2023-03-31_102954](./IMM-ADX-Full/apps/IMM-ADX-Full/res/itridev_imm_adt_rg設定畫面/2023-03-31_102954.png)
 
 
 
 - 範例  "itri-imm-adt-001" 重要的設定資訊 Azure Digital Twins Explorer ( ADX ) Model上傳後畫面，數位雙生的DTDL model樣板，產生BasicInfo.json、CncController.json、Machine.json、Queue.json、Source.json等Base Model上傳至 Azure Digital Twins Explorer
 
 
-![2023-03-31_103112](./IMM-ADX-Full/apps/IMM-ADX-Full/res/itridev_imm_adt_rg 設定畫面/2023-03-31_103112.png)
+![2023-03-31_103112](./IMM-ADX-Full/apps/IMM-ADX-Full/res/itridev_imm_adt_rg設定畫面/2023-03-31_103112.png)
 
 
 
 - 範例  "itri-imm-adt-001" 重要的設定資訊 Azure Digital Twins Explorer ( ADX ) Twins 模型設定，可自行依需求手動建立Twins或匯入已建立的Twins範例
 
 
-![2023-03-31_103220](./IMM-ADX-Full/apps/IMM-ADX-Full/res/itridev_imm_adt_rg 設定畫面/2023-03-31_103220.png)
+![2023-03-31_103220](./IMM-ADX-Full/apps/IMM-ADX-Full/res/itridev_imm_adt_rg設定畫面/2023-03-31_103220.png)
 
 
 
