@@ -314,6 +314,13 @@ Subscription ID : e0038f94-711b-4820-8415-ac34dbede1a3
 
   https://www.youtube.com/playlist?list=PLEsqL3NnFN3CTIBm1lhkIhLcG-NqZFWAY
   
+- [![YouTube 影片封面](http://img.youtube.com/vi/7qiDYDjcOxU/0.jpg)](https://www.youtube.com/watch?v=7qiDYDjcOxU "影片標題")
+
+
+
+GitHub 出於安全原因，不支持在 README 或其他 Markdown 文件中直接嵌入 `<iframe>`。這是為了防止潛在的跨站腳本攻擊（XSS）
+
+這邊方便用戶可以直接觀看 demo 影片。
 
 <iframe iframe width="2244" height="935" src="https://www.youtube.com/embed/7qiDYDjcOxU?si=Bua3qKjFU0Sf9QJ9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
@@ -351,7 +358,7 @@ Subscription ID : e0038f94-711b-4820-8415-ac34dbede1a3
 
   
 
-- Azure 多租戶，依照您自己登入帳號的權限與資源群組，須指定 您自己 Azure 的 Subscription  。![2023-09-28_105756](./IMM-ADX-Full/apps/IMM-ADX-Full/res/2023-09-28_105756.png)
+- Azure 多租戶，依照您自己登入帳號的權限與資源群組，須指定 您自己 Azure 的 Subscription 。![2023-09-28_105756](./IMM-ADX-Full/apps/IMM-ADX-Full/res/2023-09-28_105756.png)
 
 
 
